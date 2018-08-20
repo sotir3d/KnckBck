@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rigidBody;
 
     float angle;
+    float torque = 200f;
+    float force = 5000;
 
     bool fired = false;
 
@@ -23,12 +25,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-
+        direction = Camera.main.ScreenToWorldPoint(Input.mousePosition /*Input.GetTouch(0).position*/) - transform.position;
+        
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         playerRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        transform.rotation = playerRotation;
+        //transform.rotation = playerRotation;
 
         if (Input.GetButtonDown("Fire1"))
         {
@@ -38,10 +40,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(fired)
+        if (fired)
         {
             //rigidBody.velocity = new Vector2(0, 0);
-            rigidBody.AddForce(transform.right * -5000);
+            rigidBody.AddForce(direction.normalized * -force);
+
+            if (angle > 0 && angle < 90)
+                rigidBody.AddTorque(-torque);
+            else if (angle > 90 && angle < 180)
+                rigidBody.AddTorque(torque);
+            else if (angle < 0 && angle > -90)
+                rigidBody.AddTorque(torque);
+            else if (angle < -90 && angle > -180)
+                rigidBody.AddTorque(-torque);
             fired = false;
         }
     }
