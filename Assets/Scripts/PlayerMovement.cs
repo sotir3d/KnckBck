@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
         if(fired)
         {
             //rigidBody.velocity = new Vector2(0, 0);
-            rigidBody.AddForce(transform.right * -500);
+            rigidBody.AddForce(transform.right * -5000);
             fired = false;
         }
     }
