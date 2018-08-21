@@ -9,9 +9,15 @@ public class PlayerHandler : MonoBehaviour
 
     bool wobbleFinished = true;
 
+    Animator anim;
+
+    float lastWobbledTime;
+
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+
+        anim = GetComponent<Animator>();
     }
 
     public void Death()
@@ -23,75 +29,68 @@ public class PlayerHandler : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Wall") && (Mathf.Abs(rigidBody.velocity.x) > 2 || Mathf.Abs(rigidBody.velocity.y) > 2))
         {
-            PlayerWobble(0.9f, 1.2f);
+            if((Time.time - lastWobbledTime) > 0.2f)
+            {
+                lastWobbledTime = Time.time;
+                PlayerWobble();
+            }
         }
     }
+
 
     public void PlayerWobble()
     {
-        float minScale = Random.Range(0.7f, 0.9f);
-        float maxScale = Random.Range(1.1f, 1.3f);
-
-        PlayerWobble(minScale, maxScale);
+        anim.SetTrigger("wobble");
     }
 
-    public void PlayerWobble(float minScale, float maxScale)
-    {
-        if (wobbleFinished)
-        {
-            wobbleFinished = false;
-            StartCoroutine(Wobble(minScale, maxScale));
-        }
-    }
+    //IEnumerator Wobble(float minScale, float maxScale)
+    //{
+    //    Vector2 newScale = new Vector2(1,1);
 
-    IEnumerator Wobble(float minScale, float maxScale)
-    {
-        Vector2 newScale = new Vector2(1,1);
+    //    //float maxSize = 1.3f;
+    //    //float minSize = 0.8f;
 
-        //float maxSize = 1.3f;
-        //float minSize = 0.8f;
+    //    float lerpSpeed = 65f;
 
-        float lerpSpeed = 65f;
-
-        //always reset scale to default at the start
-        transform.localScale = newScale;
+    //    //always reset scale to default at the start
+    //    transform.localScale = newScale;
 
 
-        //for (int i = 0; i < iterations; i++)
-        while(Mathf.Abs(transform.localScale.x - maxScale) > 0.001f || Mathf.Abs(transform.localScale.y - maxScale) > 0.001f)
-        {
-            newScale.x = Mathf.Lerp(newScale.x, maxScale, lerpSpeed * Time.deltaTime);
-            newScale.y = Mathf.Lerp(newScale.y, maxScale, lerpSpeed * Time.deltaTime);
+    //    //for (int i = 0; i < iterations; i++)
+    //    while(Mathf.Abs(transform.localScale.x - maxScale) > 0.001f || Mathf.Abs(transform.localScale.y - maxScale) > 0.001f)
+    //    {
+    //        newScale.x = Mathf.Lerp(newScale.x, maxScale, lerpSpeed * Time.deltaTime);
+    //        newScale.y = Mathf.Lerp(newScale.y, maxScale, lerpSpeed * Time.deltaTime);
 
-            transform.localScale = newScale;
+    //        transform.localScale = newScale;
 
-            yield return null;
-        }
+    //        yield return null;
+    //    }
 
-        //for (int i = 0; i < iterations; i++)
-        while (Mathf.Abs(transform.localScale.x - minScale) > 0.001f || Mathf.Abs(transform.localScale.y - minScale) > 0.001f)
-        {
-            newScale.x = Mathf.Lerp(newScale.x, minScale, lerpSpeed * Time.deltaTime);
-            newScale.y = Mathf.Lerp(newScale.y, minScale, lerpSpeed * Time.deltaTime);
+    //    //for (int i = 0; i < iterations; i++)
+    //    while (Mathf.Abs(transform.localScale.x - minScale) > 0.001f || Mathf.Abs(transform.localScale.y - minScale) > 0.001f)
+    //    {
+    //        newScale.x = Mathf.Lerp(newScale.x, minScale, lerpSpeed * Time.deltaTime);
+    //        newScale.y = Mathf.Lerp(newScale.y, minScale, lerpSpeed * Time.deltaTime);
 
-            transform.localScale = newScale;
+    //        transform.localScale = newScale;
 
-            yield return null;
-        }
+    //        yield return null;
+    //    }
 
 
-        //for (int i = 0; i < iterations; i++)
-        while (Mathf.Abs(transform.localScale.x - 1) > 0.001f || Mathf.Abs(transform.localScale.y - 1) > 0.001f)
-        {
-            newScale.x = Mathf.Lerp(newScale.x, 1f, lerpSpeed * Time.deltaTime);
-            newScale.y = Mathf.Lerp(newScale.y, 1f, lerpSpeed * Time.deltaTime);
+    //    //for (int i = 0; i < iterations; i++)
+    //    while (Mathf.Abs(transform.localScale.x - 1) > 0.001f || Mathf.Abs(transform.localScale.y - 1) > 0.001f)
+    //    {
+    //        newScale.x = Mathf.Lerp(newScale.x, 1f, lerpSpeed * Time.deltaTime);
+    //        newScale.y = Mathf.Lerp(newScale.y, 1f, lerpSpeed * Time.deltaTime);
 
-            transform.localScale = newScale;
+    //        transform.localScale = newScale;
 
-            yield return null;
-        }
+    //        yield return null;
+    //    }
 
-        wobbleFinished = true;
+    //    wobbleFinished = true;
 
-    }
+    //}
 }
