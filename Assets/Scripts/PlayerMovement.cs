@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    PlayerHandler playerHandler;
 
     Vector2 direction;
-    Quaternion playerRotation;
     Rigidbody2D rigidBody;
+    //Quaternion playerRotation;
 
     float angle;
     float torque = 200f;
@@ -18,8 +19,10 @@ public class PlayerMovement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        playerRotation = transform.rotation;
+        //playerRotation = transform.rotation;
         rigidBody = GetComponent<Rigidbody2D>();
+
+        playerHandler = GetComponent<PlayerHandler>();
     }
 
     // Update is called once per frame
@@ -29,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         
         angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        playerRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        //playerRotation = Quaternion.AngleAxis(angle, Vector3.forward);
         //transform.rotation = playerRotation;
 
         if (Input.GetButtonDown("Fire1"))
@@ -54,6 +57,8 @@ public class PlayerMovement : MonoBehaviour
             else if (angle < -90 && angle > -180)
                 rigidBody.AddTorque(-torque);
             fired = false;
+
+            playerHandler.PlayerWobble();
         }
     }
 }
