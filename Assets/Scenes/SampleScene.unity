@@ -252,7 +252,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 152148683}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.62, y: -3.36, z: -10}
+  m_LocalPosition: {x: -0.22, y: -3.26, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 33072436}
@@ -367,7 +367,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.62, y: -3.36, z: -10}
+  m_LocalPosition: {x: -0.22, y: -3.26, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -387,11 +387,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4932459650140214, guid: 4920f2b1040b12c46bb584f707509692, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.62
+      value: -0.22
       objectReference: {fileID: 0}
     - target: {fileID: 4932459650140214, guid: 4920f2b1040b12c46bb584f707509692, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.36
+      value: -3.26
       objectReference: {fileID: 0}
     - target: {fileID: 4932459650140214, guid: 4920f2b1040b12c46bb584f707509692, type: 2}
       propertyPath: m_LocalPosition.z
@@ -545,6 +545,29 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4920f2b1040b12c46bb584f707509692, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1207069507 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1584586809839854, guid: 4920f2b1040b12c46bb584f707509692,
+    type: 2}
+  m_PrefabInternal: {fileID: 1012199837}
+--- !u!95 &1207069514
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1207069507}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb60beba08a45d14caae849cecb68671, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1261053253
 GameObject:
   m_ObjectHideFlags: 0
