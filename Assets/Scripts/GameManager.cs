@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour
 {
     UIManager uiManager;
 
-    public float test = 123f;
-
     private void Start()
     {
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
@@ -25,5 +23,33 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void NextLevel()
+    {
+        //checks if the next scene index exists
+        if (CheckIfNextLevelAvailable())
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public void ToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
+    }
+
+    public bool CheckIfNextLevelAvailable()
+    {
+        Debug.Log(SceneManager.GetSceneByName("Level1").IsValid());
+        //if (SceneManager.GetSceneByName("Level" + (SceneManager.GetActiveScene().buildIndex + 1)).IsValid())
+        if (SceneManager.GetActiveScene().buildIndex < (SceneManager.sceneCountInBuildSettings - 1))
+        {
+            return true;
+        }
+
+        return false;
     }
 }
