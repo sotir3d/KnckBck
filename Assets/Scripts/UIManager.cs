@@ -30,12 +30,10 @@ public class UIManager : MonoBehaviour
         
         if (gameManager.CheckIfNextLevelAvailable())
         {
-            Debug.Log("if");
             nextLevelButton.gameObject.SetActive(true);
         }
         else
         {
-            Debug.Log("else");
             nextLevelButton.gameObject.SetActive(false);
         }
     }

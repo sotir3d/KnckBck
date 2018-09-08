@@ -16,6 +16,8 @@ public class PlayerHandler : MonoBehaviour
 
     float lastWobbledTime;
 
+    float lerpSpeed = 10;
+
     TrailRenderer trail;
 
     private void Start()
@@ -25,7 +27,7 @@ public class PlayerHandler : MonoBehaviour
         anim = GetComponent<Animator>();
         startPosition = transform.position;
         startRotation = transform.rotation;
-        
+
         gameManager = GameObject.FindGameObjectWithTag("GameManager");
     }
 
@@ -58,5 +60,37 @@ public class PlayerHandler : MonoBehaviour
     public void PlayerWobble()
     {
         anim.SetTrigger("wobble");
+    }
+
+    public IEnumerator MovePlayerIntoGoal(Vector2 goalPosition)
+    {
+        Debug.Log("moveplayer");
+        Vector2 newPosition;
+
+        transform.rotation = new Quaternion(0, 0, 0, 0);
+
+        rigidBody.gravityScale = 0;
+
+        rigidBody.velocity = Vector2.zero;
+        rigidBody.angularVelocity = 0;
+
+        newPosition = transform.position;
+
+        for (int i = 0; i <= 100; i++)
+        {
+            //transform.Rotate(Vector3.forward * 30);
+
+            newPosition.x = Mathf.Lerp(newPosition.x, goalPosition.x, lerpSpeed * Time.deltaTime);
+            newPosition.y = Mathf.Lerp(newPosition.y, goalPosition.y, lerpSpeed * Time.deltaTime);
+            transform.position = newPosition;
+
+
+            //yield return new WaitForSeconds(0.03f);
+            yield return new WaitForEndOfFrame();
+        }
+
+
+        rigidBody.gravityScale = 1;
+
     }
 }

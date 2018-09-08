@@ -10,6 +10,9 @@ public class GoalScript : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("trigger");
+            StartCoroutine(collision.gameObject.GetComponent<PlayerHandler>().MovePlayerIntoGoal(transform.position));
+
             gameManager.GetComponent<GameManager>().LevelComplete();
 
         }

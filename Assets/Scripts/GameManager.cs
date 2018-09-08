@@ -14,7 +14,11 @@ public class GameManager : MonoBehaviour
 
     public void LevelComplete()
     {
+        Invoke("LevelCompleteScreen", 0.5f);
+    }
 
+    void LevelCompleteScreen()
+    {
         Time.timeScale = 0f;
         uiManager.LevelComplete();
     }
@@ -43,7 +47,6 @@ public class GameManager : MonoBehaviour
 
     public bool CheckIfNextLevelAvailable()
     {
-        Debug.Log(SceneManager.GetSceneByName("Level1").IsValid());
         //if (SceneManager.GetSceneByName("Level" + (SceneManager.GetActiveScene().buildIndex + 1)).IsValid())
         if (SceneManager.GetActiveScene().buildIndex < (SceneManager.sceneCountInBuildSettings - 1))
         {
